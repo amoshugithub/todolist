@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>To do list</title>
+	<script src="https://unpkg.com/vue"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="./todolist.css">
+</head>
+<body>
+	<div class="header" id="todolist">
+		<p>To do list</p>
+		<div class="inputContext">
+			<input type="text" name="inputContext" id=inputContext placeholder="please insert text..." v-model="newTodo" v-on:keyup.enter="addTodo(newTodo)">
+		</div>
+		<ul>
+			<li v-for="todo in todos"
+			>
+				{{todo.content}}
+			</li>	
+		</ul>
+	</div>
+</body>
+<script>
+	var todolistVue = new Vue({
+		el: '#todolist',
+		data: {
+			todos: [],
+			newTodo: '',
+		},
+		methods : {
+			addTodo(todo) {
+				this.todos.push({content:todo,completed:false})
+			}
+		}
+	})
+
+</script>
+
+</html>

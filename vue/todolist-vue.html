@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>To do list</title>
+	<script src="https://unpkg.com/vue"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="./todolist-vue.css">
+</head>
+<body>
+	<div class="header" id="todolist">
+		<p>To do list</p>
+		<div class="inputContext">
+			<input type="text" name="inputContext" arid=inputContext placeholder="please insert text..." v-model="newTodo" v-on:keyup.enter="addTodo(newTodo)">
+		</div>
+		<div class="content">
+			<ul>
+				<li
+				v-for="todo in todos"
+				v-bind:class={checked:todo.isChecked}
+				v-on:click="toggle(todo)"
+				v-on:dblclick="deleteItem(todo)"
+				>
+					{{todo.text}}
+					<!-- {{todo.isChecked}} -->
+				</li>
+			</ul>
+		</div>
+	</div>
+</body>
+<script>
+	var todolistVue = new Vue({
+		el:'#todolist',
+		data: {
+			todos:[],
+			newTodo:'',
+			isChecked: false
+		},
+		methods: {
+			addTodo(newTodo) {
+				this.todos.push({text:newTodo,isChecked:false})
+			},
+			toggle(todo){
+				console.log("123")
+				todo.isChecked = !todo.isChecked
+			},
+			deleteItem(todo) {
+				this.todos.splice(this.todos.indexOf(todo),1)
+			}
+
+		}
+	})
+
+</script>
+
+</html>
+
